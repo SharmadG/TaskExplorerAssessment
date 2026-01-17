@@ -1,97 +1,62 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+## Decription:
 
-# Getting Started
+Please checkout the application which I have created using React Native as part of technical assessment for Wagons Learning Limited.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+I have tried to cover all the mentioned points from the Assessment document shared via mail and have implemented all the requested functionalities. I apologies if I have missed something.
 
-## Step 1: Start Metro
+## 📁 Submission Contents
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+This folder contains:
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+1. **Source Code:** Full React Native project (excluding `node_modules` - I have removed the node_modules folder as it was mentioned as not required in document).
+2. **APK File:** A signed release APK (`app-release.apk`) is included in the root directory for immediate testing on an Android device without needing a build environment.
 
-```sh
-# Using npm
-npm start
+---
 
-# OR using Yarn
-yarn start
-```
+## 🚀 Setup & Installation
 
-## Step 2: Build and run your app
+### Prerequisites
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+- Node.js (v18 or newer recommended)
+- Java Development Kit (JDK 17)
+- Android Studio & Android SDK
 
-### Android
+### Steps to Run the Code
 
-```sh
-# Using npm
-npm run android
+1.  Open the folder in VS Code or any relevant code editor.
 
-# OR using Yarn
-yarn android
-```
+    ## OR
 
-### iOS
+    If no code editor is available, Open the folder -> Perform right mouse-click (anywhere in the open space visible) -> Click on "Open in terminal" option from the menu.
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+    ## OR
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+    Click on the folder's address bar -> Enter "cmd"
 
-```sh
-bundle install
-```
+2.  In the opened terminal, enter the following commands sequentially:
 
-Then, and every time you update your native dependencies, run:
+        1. npm install -> It will install the node modules with all the necessary dependencies.
 
-```sh
-bundle exec pod install
-```
+        2. npm start
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+    ## Now open one more terminal in the same way as before (Second terminal - while the first one is still open)
 
-```sh
-# Using npm
-npm run ios
+        3. npm run android (Please make sure that the mobile device is physically connected to the system via USB cable OR the android emulator is installed on the system)
 
-# OR using Yarn
-yarn ios
-```
+3.  Once done you can either run the application locally on your mobile device OR can simply install the standalone application from the folder.
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+    **Please find the application in the same folder. Application is named as "app-release.apk"**
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## Tech Stack and Approach
 
-## Step 3: Modify your app
+I followed the component-based architechture using Functional Components and React Hooks.
 
-Now that you have successfully run the app, let's make changes!
+State management is achieved using _useState_.
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+List is rendered using _useEffect_.
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+Navigation is implemented using _Native Stack Navigation_.
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+I have used _Flatlist_ for rendering the list to improve the efficiency of the application.
 
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+I have used _axios_ for performing Network Calls (API calls) for fetching the JSON placeholder data. Added the retry mechanism incase of API response failure.
