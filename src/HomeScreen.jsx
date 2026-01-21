@@ -68,25 +68,7 @@ const HomeScreen = ({ navigation }) => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [filterStatus, setFilterStatus] = useState('All'); // Options: 'All', 'Completed', 'Incomplete'
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      setLoading(true);
-      setError(false);
-      try {
-        const response = await axios.get(
-          'https://jsonplaceholder.typicode.com/todos',
-        );
-        setTasks(response?.data);
-      } catch (err) {
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchTasks();
-  }, []);
+  const [filterStatus, setFilterStatus] = useState('All');
 
   // Filter Logic
   const getFilteredTasks = () => {
@@ -98,9 +80,41 @@ const HomeScreen = ({ navigation }) => {
     return tasks;
   };
 
-  const handleTaskPress = item => {
-    navigation.navigate('Detail', { task: item });
+  const toggleTaskStatus = id => {
+    setTasks(prevTasks => {
+      return prevTasks.map(task => {
+        if (task.id === id) {
+          return { ...task, completed: !task.completed };
+        }
+        return task;
+      });
+    });
   };
+
+  const handleTaskPress = item => {
+    navigation.navigate('Detail', {
+      task: item,
+      onStatusUpdate: toggleTaskStatus,
+    });
+  };
+
+  const fetchTasks = async () => {
+    setLoading(true);
+    setError(false);
+    try {
+      const response = await axios.get(
+        'https://jsonplaceholder.typicode.com/todos',
+      );
+      setTasks(response?.data);
+    } catch (err) {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchTasks();
+  }, []);
 
   // Loading Indicator
   if (loading) {

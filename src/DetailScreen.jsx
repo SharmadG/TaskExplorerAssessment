@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20, backgroundColor: '#f5f5f5' },
@@ -31,18 +31,36 @@ const styles = StyleSheet.create({
   statusPending: { color: 'red' },
 
   buttonContainer: { marginTop: 20 },
+
+  customButton: {
+    paddingVertical: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 2,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });
 
 const DetailScreen = ({ route }) => {
   // Get task from navigation params
-  const { task } = route.params;
+  const { task, onStatusUpdate } = route.params;
 
   // Local state to handle the "Bonus" toggle feature locally
   const [isCompleted, setIsCompleted] = useState(task.completed);
 
   const toggleCompletion = () => {
-    setIsCompleted(!isCompleted);
-    // In a real app, we would call an API to update this here.
+    const newStatus = !isCompleted;
+    setIsCompleted(newStatus);
+
+    if (onStatusUpdate) {
+      onStatusUpdate(task.id);
+    }
+
     Alert.alert('Status Updated', 'Task status changed locally.');
   };
 
@@ -72,11 +90,17 @@ const DetailScreen = ({ route }) => {
       </View>
 
       <View style={styles.buttonContainer}>
-        <Button
-          title={isCompleted ? 'Mark as Incomplete' : 'Mark as Completed'}
+        <TouchableOpacity
+          style={[
+            styles.customButton,
+            { backgroundColor: isCompleted ? '#d9534f' : '#5cb85c' },
+          ]}
           onPress={toggleCompletion}
-          color={isCompleted ? '#d9534f' : '#5cb85c'}
-        />
+        >
+          <Text style={styles.buttonText}>
+            {isCompleted ? 'Mark as Incomplete' : 'Mark as Completed'}
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
